@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+save_data.json
+.save_*.tmp
+.shots/

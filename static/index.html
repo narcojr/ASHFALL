@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>ASHFALL — a snow-ruin action platformer</title>
+<meta name="description" content="ASHFALL is a pixel-art action platformer: climb a frozen kingdom, evolve your hero, and break the Dominion's gate.">
+<meta name="theme-color" content="#0b0a14">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASHFALL">
+<meta property="og:description" content="A pixel-art action platformer. Climb the frozen kingdom, evolve your hero, and break the Dominion's gate.">
+<meta property="og:image" content="assets/art/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/art/logo.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="game" width="960" height="540"></canvas>
+  <button id="btn-pause" class="pause hidden" data-act="pause" tabindex="-1" aria-label="Pause"></button>
+
+  <section id="scr-loading" class="screen">
+    <img class="loading-logo" src="assets/art/logo.png" alt="ASHFALL">
+    <div class="loadbar"><i id="load-fill"></i></div>
+    <p class="loading" id="load-label">LOADING 0%</p>
+  </section>
+
+  <section id="scr-error" class="screen hidden">
+    <div class="panel narrow">
+      <h2>COULD NOT START</h2>
+      <p>The game data did not load. Check your connection and try again.</p>
+      <p class="tiny">If you are running the source locally, serve it over HTTP:<br>python server.py</p>
+      <button class="btn small" data-act="retry-load"><span>RETRY</span></button>
+    </div>
+  </section>
+
+  <section id="scr-menu" class="screen hidden">
+    <img class="logo" src="assets/art/logo.png" alt="ASHFALL">
+    <p class="subtitle">A SNOW-RUIN ACTION PLATFORMER</p>
+    <nav class="menu">
+      <button class="btn" data-act="play"><span>PLAY</span></button>
+      <button class="btn" data-act="levels"><span>LEVEL</span></button>
+      <button class="btn" data-act="settings"><span>SETTINGS</span></button>
+      <button class="btn" data-act="exit"><span>EXIT</span></button>
+    </nav>
+    <p class="hint"><span class="keys">A D MOVE &middot; SPACE JUMP &middot; J ATTACK &middot; SHIFT DASH &middot; E OPEN &middot; ESC PAUSE</span><span class="touch-hint">USE THE ON-SCREEN BUTTONS</span></p>
+    <p class="build">WEB EDITION</p>
+  </section>
+
+  <section id="scr-levels" class="screen hidden">
+    <h1>SELECT LEVEL</h1>
+    <nav class="menu" id="level-list"></nav>
+    <button class="btn small" data-act="back"><span>BACK</span></button>
+  </section>
+
+  <section id="scr-settings" class="screen hidden">
+    <div class="panel">
+      <h2>SETTINGS</h2>
+      <div class="rows">
+        <label class="row"><span>MASTER VOLUME</span><input type="range" id="set-master" min="0" max="100"><b id="val-master"></b></label>
+        <label class="row"><span>MUSIC VOLUME</span><input type="range" id="set-music" min="0" max="100"><b id="val-music"></b></label>
+        <label class="row"><span>EFFECTS VOLUME</span><input type="range" id="set-sfx" min="0" max="100"><b id="val-sfx"></b></label>
+        <div class="row"><span>MUSIC</span><button class="toggle" id="tg-music_on" aria-label="Toggle music"></button></div>
+        <div class="row"><span>SOUND EFFECTS</span><button class="toggle" id="tg-sfx_on" aria-label="Toggle sound effects"></button></div>
+        <div class="row"><span>SCREEN SHAKE</span><button class="toggle" id="tg-shake" aria-label="Toggle screen shake"></button></div>
+        <div class="row"><span>SHOW FPS</span><button class="toggle" id="tg-fps" aria-label="Toggle FPS counter"></button></div>
+        <div class="row"><span>DIFFICULTY</span>
+          <div class="seg" id="seg-difficulty"><button data-v="easy">EASY</button><button data-v="normal">NORMAL</button><button data-v="hard">HARD</button></div></div>
+        <div class="row"><span>DISPLAY</span><button class="mini" data-act="fullscreen">FULLSCREEN</button></div>
+        <div class="row"><span>PROGRESS</span>
+          <span class="duo"><button class="mini" data-act="unlock-all">UNLOCK ALL</button><button class="mini danger" data-act="reset">RESET</button></span></div>
+      </div>
+      <button class="btn small" data-act="back"><span>BACK</span></button>
+    </div>
+  </section>
+
+  <section id="scr-pause" class="screen dim hidden">
+    <div class="panel narrow">
+      <h2>PAUSED</h2>
+      <p class="stats" id="pause-stats"></p>
+      <nav class="menu tight">
+        <button class="btn small" data-act="resume"><span>RESUME</span></button>
+        <button class="btn small" data-act="restart"><span>RESTART</span></button>
+        <button class="btn small" data-act="settings"><span>SETTINGS</span></button>
+        <button class="btn small" data-act="menu"><span>MAIN MENU</span></button>
+      </nav>
+    </div>
+  </section>
+
+  <section id="scr-over" class="screen dim hidden">
+    <h1 class="red">YOU HAVE FALLEN</h1>
+    <p class="stats" id="over-stats"></p>
+    <nav class="menu tight">
+      <button class="btn small" data-act="retry"><span>TRY AGAIN</span></button>
+      <button class="btn small" data-act="levels"><span>LEVELS</span></button>
+      <button class="btn small" data-act="menu"><span>MAIN MENU</span></button>
+    </nav>
+  </section>
+
+  <section id="scr-complete" class="screen dim hidden">
+    <h1 class="gold">LEVEL COMPLETE</h1>
+    <p class="stats" id="complete-stats"></p>
+    <nav class="menu tight">
+      <button class="btn small" data-act="next"><span>NEXT LEVEL</span></button>
+      <button class="btn small" data-act="retry"><span>REPLAY</span></button>
+      <button class="btn small" data-act="menu"><span>MAIN MENU</span></button>
+    </nav>
+  </section>
+
+  <section id="scr-victory" class="screen dim hidden">
+    <h1 class="gold">THE HEIR RISES</h1>
+    <p class="sub">THE DOMINION HAS FALLEN.</p>
+    <p class="stats" id="victory-stats"></p>
+    <nav class="menu tight">
+      <button class="btn small" data-act="play"><span>PLAY AGAIN</span></button>
+      <button class="btn small" data-act="menu"><span>MAIN MENU</span></button>
+    </nav>
+  </section>
+
+  <section id="scr-exit" class="screen hidden">
+    <h1>THANKS FOR PLAYING</h1>
+    <p class="sub">YOU CAN CLOSE THIS TAB NOW.</p>
+    <button class="btn small" data-act="back"><span>BACK TO MENU</span></button>
+  </section>
+
+  <div id="touch" class="hidden">
+    <div class="group"><button data-k="left" aria-label="Move left">&lt;</button><button data-k="right" aria-label="Move right">&gt;</button></div>
+    <div class="group"><button data-k="dash" aria-label="Dash">&gt;&gt;</button><button data-k="interact" aria-label="Open">E</button><button data-k="attack" aria-label="Attack">X</button><button data-k="jump" aria-label="Jump">^</button></div>
+  </div>
+
+  <div id="fade" aria-hidden="true"></div>
+  <noscript><section class="screen"><div class="panel narrow"><h2>JAVASCRIPT NEEDED</h2><p>ASHFALL runs on the canvas, so please enable JavaScript.</p></div></section></noscript>
+</div>
+<script src="js/audio.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/store.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

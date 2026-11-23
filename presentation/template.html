@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASHFALL - Endterm Presentation</title>
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<div id="deck">
+  <canvas id="bg" width="960" height="540"></canvas>
+
+  <section class="slide center" data-notes="WELCOME. WE ARE THE TEAM BEHIND ASHFALL: JESNEL BRYCE DOYONGAN (LEADER), JOHN LAWRENCE TOLEDANO, NARCO VILLANDO JR., MATTHEW ADRIAN PARRENO AND NICA YANSON. IN 10 MINUTES: OUR GAME, THE CHARACTER AND HOW IT SCALES UP, THE ASSETS AND TILESET, AND A LIVE LEVEL.">
+    <img data-img="logo" class="px logo" alt="ASHFALL">
+    <h1 class="sub gold">RISE FROM THE ASHES</h1>
+    <p class="small">A 2D SNOW-RUIN ACTION PLATFORMER</p>
+    <div class="team">
+      <b>JESNEL BRYCE DOYONGAN <i>(LEADER)</i></b>
+      <b>JOHN LAWRENCE TOLEDANO</b><b>NARCO VILLANDO JR.</b><b>MATTHEW ADRIAN PARRENO</b><b>NICA YANSON</b>
+    </div>
+    <p class="tiny">CSP201 ENDTERM PRESENTATION</p>
+  </section>
+
+  <section class="slide" data-notes="GAME NAME: ASHFALL. AN EXILE COLLECTS PIXEL CORES, EVOLVES THROUGH FOUR FORMS AND CHALLENGES THE DOMINION. HTML5 CANVAS FRONT END, PYTHON BACKEND. 960 BY 540 AT 60 FPS. THREE LEVELS. THE IDEA: THE ART GETS BETTER AS THE HERO GETS STRONGER.">
+    <h2 class="head">GAME NAME</h2>
+    <div class="row grow">
+      <div class="box w45 center"><img data-img="logo" class="px" style="width:92%" alt=""><p class="gold" style="margin-top:.6em">RISE FROM THE ASHES</p>
+        <p class="small" style="margin-top:.5em">AN EXILE COLLECTS PIXEL CORES, EVOLVES FOUR TIMES AND FACES THE DOMINION.</p></div>
+      <div class="col grow">
+        <div class="box"><h3>THE GAME</h3><ul>
+          <li>GENRE: 2D ACTION PLATFORMER</li><li>SCREEN: 960 X 540 AT 60 FPS</li><li>FRONT END: HTML, CSS, JAVASCRIPT CANVAS</li><li>BACK END: PYTHON (LEVELS, STATS, SAVES)</li></ul></div>
+        <div class="box"><h3>THE IDEA</h3><ul>
+          <li>LEVEL 1 IS CHUNKY PIXEL ART</li><li>EACH LEVEL ADDS DETAIL TO EVERYTHING</li><li>THE HERO GETS STRONGER, NOT TALLER</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="ART DIRECTION. WE DRAW EVERYTHING FROM THE SAME SHAPES AND THE SAME COLOURS. ONLY THE PIXEL SIZE CHANGES. LEVEL 1: EACH ART PIXEL IS 3 SCREEN PIXELS. LEVEL 2: 2. LEVEL 3: 1. SO THE HERO, ENEMIES, GROUND AND PROPS ALL SCALE UP TOGETHER AND STAY THE SAME DESIGN.">
+    <h2 class="head">ONE DESIGN, THREE PIXEL SIZES</h2>
+    <div class="row grow" id="tiers"></div>
+    <p class="small center" style="margin-top:.6em">SAME HERO, SAME ENEMY, SAME TILES. THE QUALITY GOES UP WITH EVERY LEVEL.</p>
+  </section>
+
+  <section class="slide" data-notes="CHARACTER DESIGN. THE HERO IS A CHIBI KNIGHT WITH SPIKY BROWN HAIR, A LONG SWORD AND A CAPE. HIS BODY IS THE SAME SIZE AT EVERY STAGE: 28 BY 46 HITBOX. WHEN HE EVOLVES HE GETS MORE HEALTH, STAMINA, DAMAGE AND SPEED, AND HIS CAPE AND TRIM CHANGE COLOUR.">
+    <h2 class="head">CHARACTER DESIGN</h2>
+    <div class="row grow" id="stages"></div>
+    <div class="chips">
+      <span>HITBOX <b>28 X 46 PX</b> AT EVERY STAGE</span><span>DRAWN IN A <b>126 X 126</b> PX CELL</span><span>ART CELL <b>42 / 63 / 126 PX</b> BY LEVEL</span>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="CHARACTER ANIMATION. THE FIVE REQUIRED ANIMATIONS: IDLE, RUN, JUMP, DASH AND ATTACK, PLUS HURT AND DEATH. EVERY FRAME IS DRAWN FROM THE SAME SKELETON SO THE MOTION MATCHES AT ALL THREE QUALITY LEVELS. THE TABS SWITCH BETWEEN LEVEL 1, 2 AND 3 ART. THE GAME LOGIC RUNS AT 60 FPS.">
+    <h2 class="head">CHARACTER ANIMATION</h2>
+    <div class="tabs" data-tabs="hero"><button class="tab on" data-t="1">LEVEL 1</button><button class="tab" data-t="2">LEVEL 2</button><button class="tab" data-t="3">LEVEL 3</button></div>
+    <div class="grid7" id="hero-anims"></div>
+    <div class="chips"><span>FRAME SIZE <b id="hero-size">42 X 42</b> PX</span><span>PIXEL <b id="hero-pixel">3 PX</b></span><span>GAME LOGIC <b>60 FPS</b></span><span>ATTACK = 3-HIT COMBO (12 FRAMES)</span></div>
+  </section>
+
+  <section class="slide" data-notes="ENEMIES. FIVE ENEMIES BUILT FROM THE SAME SKELETON AS THE HERO: FOOTMAN, ROYAL KNIGHT, ELITE KNIGHT, WITCH AND THE BOSS, THE DOMINION. EACH HAS IDLE, WALK, ATTACK, HURT AND DEATH. ATTACKS HAVE A WIND-UP FRAME SO PLAYERS CAN READ THEM.">
+    <h2 class="head">ENEMY ANIMATION</h2>
+    <div class="tabs" data-tabs="foe"><button class="tab on" data-t="1">LEVEL 1</button><button class="tab" data-t="2">LEVEL 2</button><button class="tab" data-t="3">LEVEL 3</button></div>
+    <div class="row grow" id="foes"></div>
+    <div class="chips"><span>IDLE <b>4F</b> 6 FPS</span><span>WALK <b>6F</b> 10 FPS</span><span>ATTACK <b>5F</b> 11 FPS</span><span>HURT <b>2F</b> 10 FPS</span><span>DEATH <b>6F</b> 9 FPS</span></div>
+  </section>
+
+  <section class="slide" data-notes="ASSETS. EVERYTHING IS DRAWN BY OUR OWN SCRIPTS FROM ONE PALETTE: 7 WEAPONS, ITEMS, PROPS, FIRE ANIMATION AND THE PIXEL UI. THE FONT IS ALSO A PIXEL FONT WE BUILT, SO THE MENUS MATCH THE WORLD.">
+    <h2 class="head">ASSETS</h2>
+    <div class="row grow">
+      <div class="box w40"><h3>WEAPONS (7)</h3><div id="weapons" class="wgrid"></div></div>
+      <div class="col grow">
+        <div class="box"><h3>ITEMS AND FIRE</h3><div class="icons" id="items"></div></div>
+        <div class="box"><h3>PROPS</h3><div class="icons" id="props"></div></div>
+        <div class="box"><h3>PIXEL UI</h3><div class="icons"><img data-img="btn" class="px" style="width:9em" alt=""><img data-img="btn_pause" class="px" style="width:2.6em" alt=""><span class="small">PIXEL FONT: ABCDEFG 0123456789</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="TILESET AND TILEMAP. THE GROUND TILE REPEATS EVERY 84 PIXELS, PLATFORMS ARE 42 PIXEL STONE TILES WITH A SNOW CAP, AND FOUR PARALLAX BACKGROUND LAYERS SIT BEHIND. WATCH THE LAYERS BUILD UP ON THE RIGHT. THE TABS CHANGE THE PIXEL SIZE.">
+    <h2 class="head">TILESET AND TILEMAP</h2>
+    <div class="tabs" data-tabs="tile"><button class="tab on" data-t="1">LEVEL 1</button><button class="tab" data-t="2">LEVEL 2</button><button class="tab" data-t="3">LEVEL 3</button></div>
+    <div class="row grow">
+      <div class="col w38"><div class="box"><h3>TILES</h3><div class="icons" id="tiles"></div><p class="small" id="tile-note"></p></div>
+        <div class="box"><h3>LAYERS</h3><ol class="small" id="layer-list"></ol></div></div>
+      <div class="grow"><canvas id="cv-layers" class="cv" width="960" height="540"></canvas></div>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="LEVEL DESIGN. LEVEL 1 ONLY BASIC ENEMIES. LEVEL 2 ADDS TRAPS: SPIKES, FALLING ICICLES AND FIRE VENTS. LEVEL 3 HAS TOUGHER ENEMIES AND THE BOSS FIGHT. THE PYTHON BACKEND GENERATES EACH LEVEL AND CHECKS EVERY PLATFORM CAN BE REACHED.">
+    <h2 class="head">LEVEL DESIGN</h2>
+    <div class="row grow" id="levels"></div>
+  </section>
+
+  <section class="slide" data-notes="ANIMATED LEVEL MOCK-UP. THIS IS THE REAL GAME PLAYED BY A BOT. SWITCH TABS TO SEE LEVEL 1, LEVEL 2 WITH TRAPS AND THE LEVEL 3 BOSS. NOTICE HOW THE WHOLE SCENE GETS FINER PIXELS AS WE GO UP.">
+    <div class="bar"><h2>LEVEL MOCK-UP</h2>
+      <div class="tabs" data-tabs="mock"><button class="tab on" data-t="1">LEVEL 1</button><button class="tab" data-t="2">LEVEL 2</button><button class="tab" data-t="3">LEVEL 3</button><button class="tab" id="speed">SPEED 2X</button></div></div>
+    <div style="flex:1;min-height:0;display:flex;justify-content:center"><canvas id="cv-level" class="cv" width="960" height="540" style="height:100%;width:auto;max-width:100%"></canvas></div>
+  </section>
+
+  <section class="slide center" data-notes="THANK YOU. WE ARE READY FOR YOUR QUESTIONS.">
+    <img data-img="logo" class="px logo" alt="">
+    <h1 class="sub gold">THANK YOU</h1>
+    <div class="team">
+      <b>JESNEL BRYCE DOYONGAN <i>(LEADER)</i></b>
+      <b>JOHN LAWRENCE TOLEDANO</b><b>NARCO VILLANDO JR.</b><b>MATTHEW ADRIAN PARRENO</b><b>NICA YANSON</b>
+    </div>
+    <p class="small">QUESTIONS?</p>
+  </section>
+
+  <div id="notes"></div>
+  <div id="timer">00:00</div>
+  <div id="nav"><button class="navbtn" id="prev">&lt;</button><div id="dots"></div><span id="count"></span><button class="navbtn" id="next">&gt;</button></div>
+</div>
+<script>window.DECK=/*__DATA__*/;</script>
+<script>window.GameAudio={sfx(){},resume(){},startMusic(){},stopMusic(){},configure(){}};</script>
+<script>/*__ENGINE__*/</script>
+<script>/*__SPRITES__*/</script>
+<script>/*__RENDER__*/</script>
+<script>/*__DECKJS__*/</script>
+</body>
+</html>

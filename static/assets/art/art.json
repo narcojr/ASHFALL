@@ -1,0 +1,92 @@
+{
+ "tiers": {
+  "1": {
+   "pixel": 3
+  },
+  "2": {
+   "pixel": 2
+  },
+  "3": {
+   "pixel": 1
+  }
+ },
+ "hero": {
+  "idle": {
+   "frames": 6,
+   "fps": 6,
+   "loop": true
+  },
+  "run": {
+   "frames": 8,
+   "fps": 14,
+   "loop": true
+  },
+  "jump": {
+   "frames": 3,
+   "fps": 8,
+   "loop": false
+  },
+  "dash": {
+   "frames": 3,
+   "fps": 17,
+   "loop": false
+  },
+  "attack": {
+   "frames": 12,
+   "fps": 13,
+   "loop": false
+  },
+  "hurt": {
+   "frames": 2,
+   "fps": 12,
+   "loop": false
+  },
+  "death": {
+   "frames": 6,
+   "fps": 6,
+   "loop": false
+  }
+ },
+ "foes": {
+  "idle": {
+   "frames": 4,
+   "fps": 6,
+   "loop": true
+  },
+  "walk": {
+   "frames": 6,
+   "fps": 10,
+   "loop": true
+  },
+  "attack": {
+   "frames": 5,
+   "fps": 11,
+   "loop": false
+  },
+  "hurt": {
+   "frames": 2,
+   "fps": 10,
+   "loop": false
+  },
+  "death": {
+   "frames": 6,
+   "fps": 9,
+   "loop": false
+  }
+ },
+ "hero_cell": 126,
+ "hero_origin": [
+  63,
+  118
+ ],
+ "foe_cell": 126,
+ "foe_origin": [
+  63,
+  118
+ ],
+ "boss_cell": 180,
+ "boss_origin": [
+  90,
+  166
+ ]
+}

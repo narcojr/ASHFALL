@@ -1,0 +1,358 @@
+{
+ "art": {
+  "boss_cell": 180,
+  "boss_origin": [
+   90,
+   166
+  ],
+  "foe_cell": 126,
+  "foe_origin": [
+   63,
+   118
+  ],
+  "foes": {
+   "attack": {
+    "fps": 11,
+    "frames": 5,
+    "loop": false
+   },
+   "death": {
+    "fps": 9,
+    "frames": 6,
+    "loop": false
+   },
+   "hurt": {
+    "fps": 10,
+    "frames": 2,
+    "loop": false
+   },
+   "idle": {
+    "fps": 6,
+    "frames": 4,
+    "loop": true
+   },
+   "walk": {
+    "fps": 10,
+    "frames": 6,
+    "loop": true
+   }
+  },
+  "hero": {
+   "attack": {
+    "fps": 13,
+    "frames": 12,
+    "loop": false
+   },
+   "dash": {
+    "fps": 17,
+    "frames": 3,
+    "loop": false
+   },
+   "death": {
+    "fps": 6,
+    "frames": 6,
+    "loop": false
+   },
+   "hurt": {
+    "fps": 12,
+    "frames": 2,
+    "loop": false
+   },
+   "idle": {
+    "fps": 6,
+    "frames": 6,
+    "loop": true
+   },
+   "jump": {
+    "fps": 8,
+    "frames": 3,
+    "loop": false
+   },
+   "run": {
+    "fps": 14,
+    "frames": 8,
+    "loop": true
+   }
+  },
+  "hero_cell": 126,
+  "hero_origin": [
+   63,
+   118
+  ],
+  "tiers": {
+   "1": {
+    "pixel": 3
+   },
+   "2": {
+    "pixel": 2
+   },
+   "3": {
+    "pixel": 1
+   }
+  }
+ },
+ "boss": {
+  "art": "boss",
+  "damage": 20,
+  "enrage_at": 0.5,
+  "intro_ms": 1600,
+  "max_health": 520,
+  "name": "The Dominion",
+  "size": [
+   58,
+   86
+  ],
+  "speed": 1.7,
+  "wave_damage": 16
+ },
+ "default_weapon": "gladius_voltaic",
+ "difficulty": {
+  "easy": {
+   "enemy_damage": 0.6,
+   "enemy_health": 0.8
+  },
+  "hard": {
+   "enemy_damage": 1.5,
+   "enemy_health": 1.3
+  },
+  "normal": {
+   "enemy_damage": 1.0,
+   "enemy_health": 1.0
+  }
+ },
+ "enemies": {
+  "low_level_knight": {
+   "art": "footman",
+   "attack_cooldown": 900,
+   "attack_range": 34,
+   "damage": 8,
+   "detect_range": 160,
+   "display_name": "Footman",
+   "max_health": 40,
+   "ranged": false,
+   "size": [
+    30,
+    46
+   ],
+   "speed": 1.4,
+   "windup": 380
+  },
+  "royal_knight": {
+   "art": "royal",
+   "attack_cooldown": 1100,
+   "attack_range": 40,
+   "damage": 14,
+   "detect_range": 200,
+   "display_name": "Royal Knight",
+   "max_health": 90,
+   "ranged": false,
+   "size": [
+    34,
+    56
+   ],
+   "speed": 1.1,
+   "windup": 380
+  },
+  "royal_knight_2": {
+   "art": "elite",
+   "attack_cooldown": 950,
+   "attack_range": 42,
+   "damage": 18,
+   "detect_range": 220,
+   "display_name": "Elite Knight",
+   "max_health": 130,
+   "ranged": false,
+   "size": [
+    36,
+    58
+   ],
+   "speed": 1.3,
+   "windup": 380
+  },
+  "witch": {
+   "art": "witch",
+   "attack_cooldown": 1500,
+   "attack_range": 240,
+   "damage": 12,
+   "detect_range": 260,
+   "display_name": "Witch",
+   "max_health": 55,
+   "projectile_color": "#a45af0",
+   "projectile_speed": 5,
+   "ranged": true,
+   "size": [
+    28,
+    46
+   ],
+   "speed": 0.8,
+   "windup": 450
+  }
+ },
+ "hero_size": [
+  28,
+  46
+ ],
+ "levels": [
+  {
+   "id": 1,
+   "length": 3400,
+   "name": "Frostbound Path",
+   "seed": 1101,
+   "start_cores": 0,
+   "stone_theme": 0,
+   "tagline": "Only basic enemies",
+   "theme": "forest",
+   "tier": 1
+  },
+  {
+   "id": 2,
+   "length": 4200,
+   "name": "Shattered Ruins",
+   "seed": 2202,
+   "start_cores": 5,
+   "stone_theme": 1,
+   "tagline": "Enemies and deadly traps",
+   "theme": "ruins",
+   "tier": 2
+  },
+  {
+   "id": 3,
+   "length": 3300,
+   "name": "The Dominion's Gate",
+   "seed": 3303,
+   "start_cores": 12,
+   "stone_theme": 2,
+   "tagline": "Enemies and the final boss fight",
+   "theme": "night",
+   "tier": 3
+  }
+ ],
+ "physics": {
+  "attack_cooldown": 350,
+  "attack_stamina": 12,
+  "dash_cooldown": 650,
+  "dash_ms": 170,
+  "dash_speed": 10,
+  "dash_stamina": 18,
+  "gravity": 0.6,
+  "ground_y": 460,
+  "hurt_cooldown": 700,
+  "jump_power": -11.5,
+  "max_fall": 14,
+  "move_speed": 4.2,
+  "stamina_regen": 0.15
+ },
+ "screen": {
+  "fps": 60,
+  "h": 540,
+  "w": 960
+ },
+ "stages": [
+  {
+   "cores_required": 0,
+   "damage_mult": 1.0,
+   "max_health": 100,
+   "max_stamina": 100,
+   "name": "The Exile",
+   "speed_mult": 1.0
+  },
+  {
+   "cores_required": 5,
+   "damage_mult": 1.3,
+   "max_health": 140,
+   "max_stamina": 120,
+   "name": "The Wanderer",
+   "speed_mult": 1.05
+  },
+  {
+   "cores_required": 12,
+   "damage_mult": 1.7,
+   "max_health": 190,
+   "max_stamina": 150,
+   "name": "The Reclaimer",
+   "speed_mult": 1.1
+  },
+  {
+   "cores_required": 20,
+   "damage_mult": 2.3,
+   "max_health": 260,
+   "max_stamina": 200,
+   "name": "The Heir Ascendant",
+   "speed_mult": 1.2
+  }
+ ],
+ "traps": {
+  "fire": {
+   "damage": 10,
+   "off_ms": 1700,
+   "on_ms": 1400
+  },
+  "icicle": {
+   "damage": 18,
+   "trigger": 70,
+   "warn_ms": 450
+  },
+  "spike": {
+   "damage": 14,
+   "height": 16
+  }
+ },
+ "weapons": {
+  "bipennis_warbreaker": {
+   "color": "#f0f0f4",
+   "cooldown": 550,
+   "damage": 20,
+   "display_name": "Bipennis",
+   "icon": 6,
+   "range": 50
+  },
+  "falx_rustbite": {
+   "color": "#d8d8e0",
+   "cooldown": 260,
+   "damage": 12,
+   "display_name": "Falx",
+   "icon": 4,
+   "range": 40
+  },
+  "gladius_voltaic": {
+   "color": "#8ec8ff",
+   "cooldown": 300,
+   "damage": 14,
+   "display_name": "Gladius",
+   "icon": 0,
+   "range": 46
+  },
+  "hasta_longwire": {
+   "color": "#7ae0c8",
+   "cooldown": 400,
+   "damage": 17,
+   "display_name": "Hasta",
+   "icon": 3,
+   "range": 60
+  },
+  "pilum_rocketa": {
+   "color": "#ff9a50",
+   "cooldown": 600,
+   "damage": 22,
+   "display_name": "Pilum",
+   "icon": 1,
+   "range": 70
+  },
+  "pugio_sparkspike": {
+   "color": "#c8a0ff",
+   "cooldown": 180,
+   "damage": 9,
+   "display_name": "Pugio",
+   "icon": 2,
+   "range": 30
+  },
+  "securis_ashborn": {
+   "color": "#e06060",
+   "cooldown": 650,
+   "damage": 24,
+   "display_name": "Securis",
+   "icon": 5,
+   "range": 50
+  }
+ }
+}

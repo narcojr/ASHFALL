@@ -1,0 +1,116 @@
+@font-face { font-family: AshPixel; src: url(../assets/art/ashpixel.ttf); font-display: block; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: #0b0a14; overflow: hidden; user-select: none; -webkit-user-select: none; }
+body { display: flex; align-items: center; justify-content: center; font-family: AshPixel, monospace; color: #f4f8ff; }
+body, button, input { -webkit-font-smoothing: none; font-smooth: never; text-rendering: optimizeSpeed; }
+button { -webkit-tap-highlight-color: transparent; }
+
+/* --u is set from the script: stage width divided by 960 */
+#stage { --u: 1; position: relative; width: min(100vw, calc(100vh * 16 / 9)); aspect-ratio: 16 / 9; overflow: hidden;
+  font-size: calc(var(--u) * 16px); background: #4f4c64; touch-action: none; }
+#game { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+.hidden { display: none !important; }
+
+.screen { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1em; }
+.screen.dim { background: rgba(14, 12, 30, 0.72); }
+#scr-menu, #scr-levels, #scr-exit { background: radial-gradient(ellipse at 50% 58%, rgba(11, 10, 20, 0.05) 0%, rgba(11, 10, 20, 0.3) 62%, rgba(11, 10, 20, 0.62) 100%); }
+#scr-levels { justify-content: center; }
+
+.loading-logo { width: 20em; image-rendering: pixelated; opacity: 0.9; }
+.loading { font-size: 1em; color: #cfe6ff; letter-spacing: 0.2em; }
+.loadbar { width: 24em; height: 0.9em; padding: 0.15em; background: #15131d; border: 0.1875em solid #686d80; }
+.loadbar i { display: block; width: 0%; height: 100%; background: #8fc4ee; box-shadow: inset 0 0.15em 0 rgba(255, 255, 255, 0.45); transition: width 0.15s linear; }
+
+h1 { font-size: 3em; color: #f4f8ff; text-shadow: 0.1em 0.1em 0 #232744, 0.2em 0.2em 0 rgba(11, 10, 20, 0.5); text-align: center; }
+h1.red { color: #ff7a6a; text-shadow: 0.1em 0.1em 0 #43131d, 0.2em 0.2em 0 rgba(11, 10, 20, 0.5); }
+h1.gold { color: #ffd86a; text-shadow: 0.1em 0.1em 0 #5c4110, 0.2em 0.2em 0 rgba(11, 10, 20, 0.5); }
+h2 { font-size: 2em; color: #f4f8ff; text-shadow: 0.1em 0.1em 0 #15131d; margin-bottom: 0.5em; text-align: center; }
+.sub { font-size: 1em; color: #dfe9ff; text-shadow: 0.125em 0.125em 0 #15131d; }
+.subtitle { font-size: 0.75em; letter-spacing: 0.32em; color: #cfe0ff; text-shadow: 0.1em 0.1em 0 #15131d; margin-top: -0.8em; }
+.stats { font-size: 1em; line-height: 1.8; color: #ffe9a8; text-align: center; text-shadow: 0.125em 0.125em 0 #15131d; }
+.stats .best { color: #ffd86a; letter-spacing: 0.12em; animation: pulse 1.1s steps(2) infinite; }
+.hint { position: absolute; bottom: 0.9em; font-size: 0.5em; letter-spacing: 0.08em; color: #e8f0ff; text-shadow: 0.25em 0.25em 0 #15131d; }
+.touch-hint { display: none; }
+.build { position: absolute; bottom: 0.9em; right: 1.2em; font-size: 0.42em; letter-spacing: 0.18em; color: #9aa6c4; }
+.tiny { font-size: 0.62em; line-height: 1.7; color: #9fb0d0; }
+
+.logo { width: 27em; image-rendering: pixelated; margin-top: -1em; filter: drop-shadow(0 0.4em 0 rgba(21, 19, 29, 0.5)); animation: float 6.5s ease-in-out infinite; }
+.menu { display: flex; flex-direction: column; align-items: center; gap: 0.6em; }
+.menu.tight { gap: 0.4em; }
+
+.btn { width: 18.8em; aspect-ratio: 84 / 19; border: 0; background: url(../assets/art/btn.png) center / 100% 100% no-repeat; image-rendering: pixelated;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; color: #ffffff; font-family: inherit; outline: none;
+  filter: drop-shadow(0 0.18em 0 rgba(11, 10, 20, 0.55)); transition: filter 0.08s; }
+.btn.small { width: 14em; }
+.btn span { display: block; font-size: 1.5em; line-height: 0.9; transform: translateY(-0.05em); text-shadow: 0.125em 0.125em 0 #15131d; padding-top: 0.12em; text-align: center; }
+.btn.small span { font-size: 1.22em; }
+.btn small { display: block; font-size: 0.5em; line-height: 1.2; color: #e8f0ff; margin-top: 0.35em; letter-spacing: 0.04em; }
+.btn:hover, .btn:focus-visible { background-image: url(../assets/art/btn_hover.png); filter: drop-shadow(0 0.18em 0 rgba(11, 10, 20, 0.55)) brightness(1.08); }
+.btn:focus-visible { outline: 0.12em solid #cfe6ff; outline-offset: 0.15em; }
+.btn:active span { transform: translateY(0.08em); }
+.btn.locked { filter: grayscale(1) brightness(0.6); cursor: not-allowed; }
+.btn.shake { animation: shake 0.3s; }
+#level-list { gap: 0.55em; }
+#level-list .btn { width: 27em; aspect-ratio: 84 / 23; }
+#level-list .btn span { font-size: 1.06em; background: rgba(16, 14, 24, 0.66); padding: 0.3em 1.1em 0.32em;
+  box-shadow: inset 0 0 0 0.08em rgba(200, 220, 255, 0.12); }
+#level-list .btn small { font-size: 0.46em; color: #c9d7ee; }
+#level-list .btn .tag { color: #ffd86a; }
+
+@keyframes shake { 25% { transform: translateX(-0.4em); } 75% { transform: translateX(0.4em); } }
+@keyframes float { 50% { transform: translateY(-0.16em); } }
+@keyframes pulse { 50% { opacity: 0.55; } }
+
+.panel { width: 40em; padding: 1em 1.4em 0.8em; display: flex; flex-direction: column; align-items: center; gap: 0.5em;
+  border: 0.75em solid transparent; border-image: url(../assets/art/panel.png) 4 fill / 0.75em / 0 stretch; image-rendering: pixelated;
+  filter: drop-shadow(0 0.5em 0 rgba(11, 10, 20, 0.45)); }
+.panel.narrow { width: 24em; }
+.panel p { font-size: 0.75em; line-height: 1.6; text-align: center; }
+.panel pre { font-family: inherit; font-size: 0.9em; color: #9fe39f; }
+.rows { width: 100%; display: flex; flex-direction: column; gap: 0.4em; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 1em; font-size: 0.75em; }
+.row > span:first-child { flex: 0 0 12em; }
+.row b { width: 3em; text-align: right; color: #ffe9a8; font-weight: normal; }
+
+input[type=range] { -webkit-appearance: none; appearance: none; flex: 1; height: 0.9em; background: #15131d; border: 0.1875em solid #686d80; outline: none; cursor: pointer; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 0.9em; height: 1.4em; background: #f4f8ff; border: 0.1875em solid #15131d; }
+input[type=range]::-moz-range-thumb { width: 0.9em; height: 1.4em; background: #f4f8ff; border: 0.1875em solid #15131d; border-radius: 0; }
+input[type=range]:focus-visible { border-color: #8fc4ee; }
+
+.toggle, .mini, .seg button { font-family: inherit; font-size: 1em; color: #ffffff; background: #464a5c; border: 0.1875em solid #15131d; box-shadow: inset 0 0.1875em 0 #686d80; padding: 0.3em 0.8em; cursor: pointer; }
+.toggle { min-width: 5em; }
+.toggle::before { content: "OFF"; }
+.toggle.on { background: #3a7a2a; box-shadow: inset 0 0.1875em 0 #6cc24a; }
+.toggle.on::before { content: "ON"; }
+.seg { display: flex; }
+.seg button.on { background: #a0701c; box-shadow: inset 0 0.1875em 0 #e6b43c; }
+.duo { display: flex; gap: 0.4em; }
+.danger { background: #7a2230; box-shadow: inset 0 0.1875em 0 #d24a4a; }
+.toggle:hover, .mini:hover, .seg button:hover, .toggle:focus-visible, .mini:focus-visible, .seg button:focus-visible { filter: brightness(1.3); outline: none; }
+.panel .btn { margin-top: 0.3em; }
+
+.pause { position: absolute; top: 2%; right: 1.4%; width: 3.6em; aspect-ratio: 1; border: 0; z-index: 4; cursor: pointer;
+  background: url(../assets/art/btn_pause.png) center / 100% 100% no-repeat; image-rendering: pixelated; filter: drop-shadow(0 0.2em 0 rgba(11, 10, 20, 0.4)); }
+.pause:hover { filter: brightness(1.3); }
+
+#touch { position: absolute; left: 0; right: 0; bottom: 3%; display: flex; justify-content: space-between; padding: 0 3%; z-index: 4; pointer-events: none; }
+#touch .group { display: flex; gap: 0.8em; pointer-events: auto; }
+#touch button { width: 3.8em; height: 3.8em; border: 0.1875em solid #15131d; background: rgba(70, 74, 92, 0.72); color: #fff; font-family: inherit; font-size: 1em; touch-action: none;
+  box-shadow: inset 0 0.18em 0 rgba(255, 255, 255, 0.18), 0 0.18em 0 rgba(11, 10, 20, 0.35); }
+#touch button.down { background: rgba(143, 196, 238, 0.85); }
+
+#fade { position: absolute; inset: 0; z-index: 30; background: #06050c; opacity: 0; pointer-events: none; transition: opacity 0.18s linear; }
+#fade.on { opacity: 1; }
+
+.touch .keys { display: none; }
+.touch .touch-hint { display: inline; }
+.touch .build { display: none; }
+.touch #scr-menu, .touch #scr-levels { gap: 0.7em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .logo { animation: none; }
+  .stats .best { animation: none; }
+  .btn.shake { animation: none; }
+  #fade { transition: none; }
+}
